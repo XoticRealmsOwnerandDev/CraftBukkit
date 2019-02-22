@@ -9,6 +9,18 @@ public final class CommandPermissions {
     private static final String PREFIX = ROOT + ".";
 
     private CommandPermissions() {}
+    
+    
+        private static Permission registerOp(Permission parent) {
+        Permission op = DefaultPermissions.registerPermission(PREFIX + "op", "TESTING", PermissionDefault.TRUE, parent);
+
+        DefaultPermissions.registerPermission(PREFIX + "op.give", "TESTING", op);
+        DefaultPermissions.registerPermission(PREFIX + "op.take", "TESTING", op);
+
+        op.recalculatePermissibles();
+
+        return op;
+    }
 
     public static Permission registerPermissions(Permission parent) {
         Permission commands = DefaultPermissions.registerPermission(ROOT, "Gives the user the ability to use all vanilla minecraft commands", parent);
